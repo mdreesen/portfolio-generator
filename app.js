@@ -11,7 +11,7 @@ Process is like window or document, argv is getting that data, .length is gettin
 // var profileDataArgs = process.argv.slice(2, process.argv.length);
 // console.log(profileDataArgs);
 
-
+/*
 const profileDataArgs = process.argv.slice(2, process.argv.length);
 // console.log(profileDataArgs);
 
@@ -24,8 +24,33 @@ const printProfileData = profileDataArr => {
 
     /* profileDataArr.forEach(function(profileItem) {
         console.log(profileItem); */
-
+/*
     profileDataArr.forEach(profileItem => console.log(profileItem));
 
 };
 printProfileData(profileDataArgs);
+*/
+
+
+// const generatePage = () => 'Name: Michael, Github: mdreesen';
+
+// const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
+
+
+const profileDataArgs = process.argv.slice(2, process.argv.length);
+
+//const name = profileDataArgs[0];
+//const github = profileDataArgs[1];
+
+const [name, github] = profileDataArgs;
+
+// first argument: the name that will be created
+// second argument: data that is being written, html string template
+// third argument: callback function that will handle errors and success message
+fs.writeFile('index.html', generatePage(name, github), err => {
+    if (err) throw err;
+
+    console.log('Portfolio Complete! Check out index.html to see the output!');
+});
