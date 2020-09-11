@@ -43,7 +43,7 @@ const profileDataArgs = process.argv.slice(2, process.argv.length);
 
 //const name = profileDataArgs[0];
 //const github = profileDataArgs[1];
-
+// Below is the same as the above
 const [name, github] = profileDataArgs;
 
 // first argument: the name that will be created
