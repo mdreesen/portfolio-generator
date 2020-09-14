@@ -35,22 +35,34 @@ printProfileData(profileDataArgs);
 // const generatePage = () => 'Name: Michael, Github: mdreesen';
 
 // const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
-const fs = require('fs');
-const generatePage = require('./src/page-template.js');
+//const fs = require('fs');
+//const generatePage = require('./src/page-template.js');
 
 
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+//const profileDataArgs = process.argv.slice(2, process.argv.length);
 
 //const name = profileDataArgs[0];
 //const github = profileDataArgs[1];
 // Below is the same as the above
-const [name, github] = profileDataArgs;
+//const [name, github] = profileDataArgs;
 
 // first argument: the name that will be created
 // second argument: data that is being written, html string template
 // third argument: callback function that will handle errors and success message
-fs.writeFile('index.html', generatePage(name, github), err => {
-    if (err) throw err;
+//fs.writeFile('index.html', generatePage(name, github), err => {
+// if (err) throw err;
 
-    console.log('Portfolio Complete! Check out index.html to see the output!');
-});
+// console.log('Portfolio Complete! Check out index.html to see the output!');
+//});
+
+const inquirer = require('inquirer');
+
+// console.log(inquirer);
+
+inquirer
+    .prompt([{
+        type: 'input',
+        name: 'name',
+        message: 'What is your name?'
+    }])
+    .then(answers => console.log(answers));
