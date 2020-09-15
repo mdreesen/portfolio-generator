@@ -80,6 +80,7 @@ const promptUser = () => {
 
 const promptProject = portfolioData => {
     portfolioData.projects = [];
+
     console.log(`
     =================
     Add a New Project
