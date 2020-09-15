@@ -119,6 +119,7 @@ const promptProject = portfolioData => {
         }
     ]);
 };
+
 promptUser()
     .then(answers => console.log(answers))
     .then(promptProject)
