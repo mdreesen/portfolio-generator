@@ -79,7 +79,8 @@ const promptUser = () => {
 };
 
 const promptProject = portfolioData => {
-    portfolioData = [];
+    portfolioData.projects = [];
+
     console.log(`
     =================
     Add a New Project
@@ -119,6 +120,7 @@ const promptProject = portfolioData => {
         }
     ]);
 };
+
 promptUser()
     .then(answers => console.log(answers))
     .then(promptProject)
