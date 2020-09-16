@@ -79,7 +79,9 @@ const promptUser = () => {
 };
 
 const promptProject = portfolioData => {
-    portfolioData.projects = [];
+    if (!portfolioData.projects) {
+        portfolioData.projects = [];
+    }
 
     console.log(`
     =================
@@ -87,38 +89,50 @@ const promptProject = portfolioData => {
     =================
     `);
     return inquirer.prompt([{
-            type: 'input',
-            name: 'name',
-            message: 'What is the name of your project?'
-        },
-        {
-            type: 'input',
-            name: 'description',
-            message: 'Provide a description of the project (Required)'
-        },
-        {
-            type: 'checkbox',
-            name: 'languages',
-            message: 'What language did you use this project with? (Check all that apply)',
-            choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
-        },
-        {
-            type: 'input',
-            name: 'link',
-            message: 'Enter the Github link to your project. (Required)',
-        },
-        {
-            type: 'confirm',
-            name: 'feature',
-            message: 'Would you like to feature this project?'
-        },
-        {
-            type: 'confirm',
-            name: 'confirmAddProject',
-            message: 'Would you like to enter another project?',
-            default: false
-        }
-    ]);
+                type: 'input',
+                name: 'name',
+                message: 'What is the name of your project?'
+            },
+            {
+                type: 'input',
+                name: 'description',
+                message: 'Provide a description of the project (Required)'
+            },
+            {
+                type: 'checkbox',
+                name: 'languages',
+                message: 'What language did you use this project with? (Check all that apply)',
+                choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+            },
+            {
+                type: 'input',
+                name: 'link',
+                message: 'Enter the Github link to your project. (Required)',
+            },
+            {
+                type: 'confirm',
+                name: 'feature',
+                message: 'Would you like to feature this project?'
+            },
+            {
+                type: 'confirm',
+                name: 'confirmAddProject',
+                message: 'Would you like to enter another project?',
+                default: false
+            }
+        ])
+        .then(projectData => {
+            // we are pushing a new project
+            portfolioData.projects.push(projectData);
+            // we're evaluating the user response to whether they wish to add more projects
+            // If the user wishes to add more projects, then this condition will evaluate to true
+            // This will then call promptProject(portfolioData) function
+            if (projectData.confirmAddProject) {
+                return promptProject(portfolioData);
+            } else {
+                return portfolioData;
+            }
+        });
 };
 
 promptUser()
