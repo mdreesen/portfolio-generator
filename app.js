@@ -35,8 +35,8 @@ printProfileData(profileDataArgs);
 // const generatePage = () => 'Name: Michael, Github: mdreesen';
 
 // const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
-//const fs = require('fs');
-//const generatePage = require('./src/page-template.js');
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
 
 //const profileDataArgs = process.argv.slice(2, process.argv.length);
@@ -185,4 +185,10 @@ const promptProject = portfolioData => {
 
 promptUser()
     .then(promptProject)
-    .then(portfolioData => console.log(portfolioData));
+    .then(portfolioData => {
+        const pageHTML = generatePage(portfolioData);
+
+        fs.writeFile('./index.html', pageHTML, err => {
+            if (err) throw new Error(err);
+        });
+    });
