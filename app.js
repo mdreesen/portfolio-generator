@@ -130,12 +130,12 @@ const promptProject = portfolioData => {
             if (projectData.confirmAddProject) {
                 return promptProject(portfolioData);
             } else {
+                // If the user decides not to add more projects, it will evaluate to false
                 return portfolioData;
             }
         });
 };
 
 promptUser()
-    .then(answers => console.log(answers))
     .then(promptProject)
-    .then(projectAnswers => console.log(projectAnswers));
+    .then(portfolioData => console.log(portfolioData));
